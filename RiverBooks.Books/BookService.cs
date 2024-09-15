@@ -5,7 +5,7 @@ internal class BookService : IBookService
 {
   private readonly IBookRepository _bookRepository;
 
-  internal BookService(IBookRepository bookRepository)
+  public BookService(IBookRepository bookRepository)
   {
     _bookRepository = bookRepository;
   }
