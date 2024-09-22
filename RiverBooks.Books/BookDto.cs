@@ -1,7 +1,7 @@
 namespace RiverBooks.Books;
 
 public record BookDto(
-    Guid Id,
+    Guid? Id,
     string Title,
     string Author,
     decimal Price

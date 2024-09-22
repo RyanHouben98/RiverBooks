@@ -12,7 +12,7 @@ internal class BookService : IBookService
 
   public async Task CreateBookAsync(BookDto newBook)
   {
-    var book = new Book(newBook.Id, newBook.Title, newBook.Author, newBook.Price);
+    var book = new Book(Guid.NewGuid(), newBook.Title, newBook.Author, newBook.Price);
 
     await _bookRepository.AddAsync(book);
     await _bookRepository.SaveChangesAsync();
@@ -29,9 +29,14 @@ internal class BookService : IBookService
     }
   }
 
-  public async Task<BookDto> GetBookByIdAsync(Guid id)
+  public async Task<BookDto?> GetBookByIdAsync(Guid id)
   {
     var book = await _bookRepository.GetByIdAsync(id);
+
+    if (book is null)
+    {
+      return null;
+    } 
 
     return new BookDto(book!.Id, book.Title, book.Author, book.Price);
   }
